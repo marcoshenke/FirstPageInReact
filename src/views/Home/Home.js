@@ -1,12 +1,27 @@
 import React from "react"
 import {HelloWorld} from "components"
+import { useState } from "react"
+
+import api from "service/api"
+import LebronvsLuka from "images/LebronvsLuka.jpg"
 
 
 const Home = () => {
+  const [usuarios, setUsuarios] = useState()
+  const getUsuarios = async () => {
+    const response = await api.get('/users', { params: { per_page: 5}})
+    
+    setUsuarios(response?.data)
+  }
+  
   return (
     <div className="background">
-      <HelloWorld name="Yoda" />
-      <HelloWorld name="Lebron" email="lebron@nba.com" />
+      <button onClick={getUsuarios}>Carregar usuários</button>
+      {
+        usuarios?.map((usuario) => <HelloWorld name={usuario.login}/>)
+      }
+
+      <img src={LebronvsLuka} alt="lebron"/>   
     </div>    
   )
 }

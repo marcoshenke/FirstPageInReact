@@ -1,12 +1,14 @@
 import React from "react"
 import './styles.css'
-import LebronvsLuka from "images/LebronvsLuka.jpg"
+import helpers from 'helpers'
+
 
 const HelloWorld = ({name, email}) => {
+  const nameUpper = helpers.upperCase(name)
   return (
   <>
-    <h1>Hello {name} {email} </h1> 
-    <img src={LebronvsLuka} alt="lebron"/>   
+    <h1>Hello {nameUpper} {email} </h1> 
+    
   </>  
   )
 }
